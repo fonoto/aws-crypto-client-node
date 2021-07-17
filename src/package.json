@@ -1,0 +1,17 @@
+{
+  "name": "aws_crypto_client_node",
+  "version": "1.0.0",
+  "description": "Encrypt/Decrypt using Node.js @aws-crypto/client-node NPM package with AWS KMS",
+  "main": "app.js",
+  "repository": "https://github.com/fonoto",
+  "author": "Vijay Shanker",
+  "license": "Free",
+  "dependencies": {
+    "@aws-crypto/client-node": "^1.7.0"
+  },
+  "scripts": {
+  },
+  "devDependencies": {
+    "aws-sdk": "^2.815.0"
+  }
+}

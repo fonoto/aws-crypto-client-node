@@ -1,0 +1,35 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  Encrypt/Decrypt using Node.js "@aws-crypto/client-node" NPM package with AWS KMS
+  
+Globals:
+  Function:
+    Timeout: 3
+
+Resources:
+  AwsCryptoFunction:
+    Type: AWS::Serverless::Function 
+    Properties:
+      CodeUri: src/
+      Handler: app.lambdaHandler
+      Runtime: nodejs12.x
+      Policies:
+        - AWSKeyManagementServicePowerUser   
+      Events:
+        AwsCrypto:
+          Type: Api 
+          Properties:
+            Path: /awscrypto
+            Method: get
+
+Outputs:
+  AwsCryptoApi:
+    Description: "API Gateway endpoint URL for Prod stage for AWS Crypto function"
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/awscrypto/"
+  AwsCryptoFunction:
+    Description: "AWS Crypto Lambda Function ARN"
+    Value: !GetAtt AwsCryptoFunction.Arn
+  AwsCryptoFunctionIamRole:
+    Description: "Implicit IAM Role created for AWS Crypto function"
+    Value: !GetAtt AwsCryptoFunctionRole.Arn
